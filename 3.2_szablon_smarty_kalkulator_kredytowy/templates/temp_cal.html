@@ -1,0 +1,95 @@
+{extends file="../app/calc_view.html"}
+
+		{block name=header_kal}
+			<!-- Header -->
+				<header id="header">
+				<h1 id="logo"><a href="calc.php"><img src="../images/Logo.png" style="width: 100%;"></a></h1>
+					<nav id="nav">
+						<ul>
+							<li>
+							<a href="{$app_url}/app/security/logout.php" class="button primary">Logout</a>
+							</li>
+						</ul>
+					</nav>
+				</header>
+		{/block}
+
+		{block name=content_kal}
+		<!-- One -->
+	<br/>
+	<section style="padding-top: 50px;">	
+		<div class="content">
+			<div class="container">
+				<div class="row">	
+					<div class="col-4 col-12-medium" style="float: left;">
+						
+					<form action="{$app_url}/app/calc.php" method="post">
+					<label for="id_x">Kwota kredytu (10 000zl - 300 000zl): </label>
+					<input id="id_x" type="text" name="kredyt" value="{$form['kredyt']}" /><br />
+					<label for="id_y">Ile lat (5-20): </label>
+					<input id="id_y" type="text" name="lat" value="{$form['lat']}" /><br />
+					<label for="id_z">
+						
+					{if $role == 'admin'}
+					Oprocentowanie (1%-99%):
+					{else}
+					Oprocentowanie (5%-20%):
+					{/if}
+						
+					</label>
+					<input id="id_z" type="text" name="oproc" value="{$form['oproc']}" /><br />
+					<input type="submit" value="Oblicz"/>
+				</form>	
+				</div>
+				<div style="padding-left: 5%; padding-top: 1em; text-align: center;">
+			
+					{* wyświeltenie listy błędów, jeśli istnieją *}
+			
+					{if isset($messages) }
+						{if count($messages) > 0 }
+							<ol style="margin-top: 1em; padding: 1em 1em 1em 2em; border-radius: 0.5em; background-color: #f88; color:black; font-size:30px; min-width:25em;">
+							{foreach $messages as $key => $msg }
+								<li>{$msg}</li>
+							{/foreach}
+						</ol>
+						{/if}
+					{/if}
+			
+				{if isset($result) }
+					<div style="margin-top: 1em; padding: 1em; border-radius: 0.5em; background-color: #ff9966; color:black; font-size:30px; width:25em;">
+					Twoja miesięczna rata wynosi: <br>{$result} zl
+				</div>
+				{/if}
+				</div>
+			</div>	
+		</div>
+	</div>
+</section>
+<br/>
+		{/block}
+
+		{block name=footer_kal}
+<!-- Footer -->
+<footer id="footer">
+	<p>{$page_footer|default:"Stópka"}</p>
+	<ul class="copyright">
+		<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+	</ul>
+</footer>
+
+</div>
+
+<!-- Scripts -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/jquery.scrolly.min.js"></script>
+<script src="assets/js/jquery.dropotron.min.js"></script>
+<script src="assets/js/jquery.scrollex.min.js"></script>
+<script src="assets/js/browser.min.js"></script>
+<script src="assets/js/breakpoints.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+
+</body>
+</html>
+{/block}
+			
